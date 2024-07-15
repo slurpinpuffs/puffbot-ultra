@@ -1,1 +1,3 @@
 yt-community-to-discord-bot/img*
+__pycache__/
+*.py[cod]
