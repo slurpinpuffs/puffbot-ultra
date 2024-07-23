@@ -11,7 +11,10 @@ class Server:
     
     def __init__(self, server_id, yt_channels=None, posting_discord_channel=None):
         self.server_id = server_id
-        self.yt_channels = yt_channels # Dict with channel names matched to last updates
+        if yt_channels is None:
+            self.yt_channels = {} # Instantiate empty dict
+        else:
+            self.yt_channels = yt_channels # Dict with channel names matched to last updates
         self.posting_discord_channel = posting_discord_channel # Which channel to post in
 
     def get_id(self):
