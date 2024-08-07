@@ -6,9 +6,8 @@ import json
 
 EXPIRATION_TIME = 1 * 60 * 60
 
+
 class Server:
-    #TODO: Decide which class should watch for commands in servers
-    
     def __init__(self, server_id, yt_channels=None, posting_discord_channel=None):
         self.server_id = server_id
         if yt_channels is None:
