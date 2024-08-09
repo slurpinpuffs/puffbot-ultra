@@ -32,8 +32,9 @@ async def on_ready():
 
 
 @bot.event
-async def on_guild_join(self, guild):
+async def on_guild_join(guild):
     servers.add_server(guild.id)
+    print(f'Successfully added {guild.name} to server list.')
 
 
 @bot.command(description="Add new YouTube channel to track posts on.")
