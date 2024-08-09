@@ -48,7 +48,6 @@ class Server:
             # TODO: Reduce redundant code when making post to Discord WITH images
             print(f"\n[Post {community_post.post_id} with {image_count} images]")
             print(f"\t{community_post.get_text()}")
-            
 
     def set_recent_post(self, channel_name, recent_post_id):
         # Saves new recent post to dict
@@ -72,12 +71,11 @@ class Server:
                 f.write(data)
                 f.close()
                 image_count += 1
-            except:
+            except Exception:
                 print("Failed to download image.")
             image_index += 1
         return image_count
 
-    
     def check_for_updates(self):
         for channel in self.yt_channels:
             ct = CommunityTab(channel)
