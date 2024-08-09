@@ -18,6 +18,7 @@ description = "A bot that gets YouTube community post updates."
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
+intents.guilds = True
 
 bot = commands.Bot(command_prefix="p!", description=description, intents=intents)
 
@@ -30,8 +31,13 @@ async def on_ready():
     print('------')
 
 
+@bot.event
+async def on_guild_join(self, guild):
+    servers.add_server(guild.id)
+
+
 @bot.command(description="Add new YouTube channel to track posts on.")
-async def addchannel(ctx, channel_name: str):
+async def add_channel(ctx, channel_name: str):
     try:
         # Gets server id of where command was called
         server_id = ctx.message.guild.id
