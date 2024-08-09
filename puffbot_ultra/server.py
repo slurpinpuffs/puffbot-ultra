@@ -8,13 +8,13 @@ EXPIRATION_TIME = 1 * 60 * 60
 
 
 class Server:
-    def __init__(self, server_id, yt_channels=None, posting_discord_channel=None):
+    def __init__(self, server_id, yt_channels=None, update_channel_id=None):
         self.server_id = server_id
         if yt_channels is None:
             self.yt_channels = {}  # Instantiate empty dict
         else:
             self.yt_channels = yt_channels  # Dict with channel names matched to last updates
-        self.posting_discord_channel = posting_discord_channel  # Which channel to post in
+        self.update_channel_id = update_channel_id  # Which channel to post in
 
     def get_id(self):
         return self.server_id
@@ -22,8 +22,8 @@ class Server:
     def get_yt_channels(self):
         return self.yt_channels
     
-    def set_discord_channel(self, discord_channel):
-        self.posting_discord_channel = discord_channel
+    def set_update_channel_id(self, discord_channel_id):
+        self.update_channel_id = discord_channel_id
     
     def add_yt_channel(self, channel_name):
         # Adds new yt channel to channel list and initializes latest community post
