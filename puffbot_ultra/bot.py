@@ -38,7 +38,7 @@ async def on_guild_join(guild):
 
 
 @bot.command(description="Add new YouTube channel to track posts on.")
-async def add_channel(ctx, channel_name: str):
+async def add_yt_channel(ctx, channel_name: str):
     try:
         # Gets server id of where command was called
         server_id = ctx.message.guild.id
@@ -50,6 +50,25 @@ async def add_channel(ctx, channel_name: str):
             server.add_yt_channel(channel_name)
     except Exception:
         await ctx.send("Failed! Please make sure a valid YouTube channel name was entered.")
+
+
+@bot.command(description="Set channel in server to post updates in. Use channel ID, NOT name.")
+async def set_post_channel(ctx, channel_id: int):
+    try:
+        # Gets server id of where command was called
+        server_id = ctx.message.guild.id
+        server = servers.get_server_by_id(server_id)
+
+        if server == -1:
+            raise Exception
+        else:
+            channel = server.get_channel_or_thread(channel_id)
+            if channel is None:
+                raise Exception
+            else:
+                server.set_discord_channel(channel)
+    except Exception:
+        await ctx.send("Failed! Make sure a valid channel id is used.")
 
 
 bot.run(token)

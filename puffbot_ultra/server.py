@@ -11,10 +11,10 @@ class Server:
     def __init__(self, server_id, yt_channels=None, posting_discord_channel=None):
         self.server_id = server_id
         if yt_channels is None:
-            self.yt_channels = {} # Instantiate empty dict
+            self.yt_channels = {}  # Instantiate empty dict
         else:
-            self.yt_channels = yt_channels # Dict with channel names matched to last updates
-        self.posting_discord_channel = posting_discord_channel # Which channel to post in
+            self.yt_channels = yt_channels  # Dict with channel names matched to last updates
+        self.posting_discord_channel = posting_discord_channel  # Which channel to post in
 
     def get_id(self):
         return self.server_id
@@ -34,7 +34,8 @@ class Server:
     
     def post_to_discord(self, community_post, yt_channel):
         # TODO: Post to selected Discord channel in server, save as recent post in dict
-        post_thumbnails = community_post.get_thumbnails() # TODO: Check if there are thumbnails (in json). If there are, post with thumbnails
+        post_thumbnails = community_post.get_thumbnails()  # TODO: Check if there are thumbnails (in json).
+        # If there are, post with thumbnails
         post_text = community_post.get_text()
 
         # If post doesn't have thumbnails, post text
