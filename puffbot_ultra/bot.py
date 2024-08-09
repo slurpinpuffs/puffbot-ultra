@@ -11,7 +11,6 @@ import random
 f = open("./config.json")
 config = f.read()
 token = json.loads(config)["token"]
-print(token)
 
 description = "A bot that gets YouTube community post updates."
 
@@ -63,17 +62,19 @@ async def setupdatechannel(ctx, channel_id: int):
         server = servers.get_server_by_id(server_id)
 
         if server == -1:
-            raise Exception
+            raise Exception(ValueError)
         else:
-            channel = server.get_channel_or_thread(channel_id)
+            channel = ctx.message.guild.get_channel_or_thread(channel_id)
             if channel is None:
-                raise Exception
+                raise Exception(NameError)
             else:
-                server.set_discord_channel(channel)
+                server.set_update_channel_id(channel_id)
                 servers.save()
                 await ctx.send("Successfully set updates channel.")
-    except Exception:
+    except NameError:
         await ctx.send("Failed! Make sure a valid channel id is used.")
+    except ValueError:
+        await ctx.send("Failed! Server error.")
 
 
 bot.run(token)
