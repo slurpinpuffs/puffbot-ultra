@@ -22,7 +22,9 @@ class ServerList:
         for server in self.servers:
             if server == new_server_id:
                 pass
-        self.servers.append(new_server_id)
+
+        new_server = Server(new_server_id)
+        self.servers.append(new_server)
 
     def remove_server(self, server_id):
         self.servers.remove(server_id)
