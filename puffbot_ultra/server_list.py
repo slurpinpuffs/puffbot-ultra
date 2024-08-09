@@ -18,11 +18,14 @@ class ServerList:
                 return server
         return -1
     
-    def add_server(self, new_server):
+    def add_server(self, new_server_id):
         for server in self.servers:
-            if server == new_server:
+            if server == new_server_id:
                 pass
-        self.servers.append(new_server)
+        self.servers.append(new_server_id)
+
+    def remove_server(self, server_id):
+        self.servers.remove(server_id)
 
     def load(self):
         try:
