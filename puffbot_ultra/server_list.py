@@ -9,12 +9,9 @@ class ServerList:
         self.servers = []  # List of saved Server objects
         self.load()
 
-    def get_servers(self):
-        return self.servers
-
     def get_server_by_id(self, server_id):
         for server in self.servers:
-            if server.get_id() == server_id:
+            if server.server_id == server_id:
                 return server
         return -1
     

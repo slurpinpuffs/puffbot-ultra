@@ -15,12 +15,6 @@ class Server:
         else:
             self.yt_channels = yt_channels  # Dict with channel names matched to last updates
         self.update_channel_id = update_channel_id  # Which channel to post in
-
-    def get_id(self):
-        return self.server_id
-    
-    def get_yt_channels(self):
-        return self.yt_channels
     
     def set_update_channel_id(self, discord_channel_id):
         self.update_channel_id = discord_channel_id
