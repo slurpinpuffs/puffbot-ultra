@@ -1,9 +1,3 @@
-from youtube_community_tab import CommunityTab
-import requests
-import os
-from PIL import Image
-import json
-
 EXPIRATION_TIME = 1 * 60 * 60
 
 
