@@ -140,7 +140,7 @@ async def post_update(server_id, community_post, yt_channel):
         pass
 
 
-def download_thumbnails(self, thumbnails, yt_channel):
+def download_thumbnails(thumbnails, yt_channel):
     # Downloads images in channel-specific directory, returns number of images
     channel_dir = "channels/" + yt_channel
 
