@@ -17,12 +17,14 @@ token = json.loads(config)["token"]
 
 description = "A bot that gets YouTube community post updates."
 
+activity = discord.CustomActivity(name="Keeping people updated!", emoji=discord.PartialEmoji.from_str("🩷"))
+
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 intents.guilds = True
 
-bot = commands.Bot(command_prefix="pu!", description=description, intents=intents)
+bot = commands.Bot(command_prefix="pu!", description=description, intents=intents, activity=activity)
 
 servers = ServerList()
 
