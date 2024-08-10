@@ -9,7 +9,6 @@ import requests
 
 import discord
 from discord.ext import commands
-import random
 
 EXPIRATION_TIME = 1 * 60 * 60
 
