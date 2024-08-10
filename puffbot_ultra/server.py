@@ -31,23 +31,6 @@ class Server:
 
     def remove_yt_channel(self, channel_name):
         self.yt_channels.pop(channel_name)
-    
-    def post_to_discord(self, community_post, yt_channel):
-        # TODO: Post to selected Discord channel in server, save as recent post in dict
-        post_thumbnails = community_post.get_thumbnails()  # TODO: Check if there are thumbnails (in json).
-        # If there are, post with thumbnails
-        post_text = community_post.get_text()
-
-        # If post doesn't have thumbnails, post text
-        if not post_thumbnails:
-            print(f"\n[Post {community_post.post_id}]")
-            print(f"\t{post_text}")
-        # If post has thumbnails, download and post thumbnails 
-        else:
-            image_count = self.download_thumbnails(post_thumbnails, yt_channel)
-            # TODO: Reduce redundant code when making post to Discord WITH images
-            print(f"\n[Post {community_post.post_id} with {image_count} images]")
-            print(f"\t{community_post.get_text()}")
 
     def set_recent_post(self, channel_name, recent_post_id):
         # Saves new recent post to dict
@@ -75,16 +58,3 @@ class Server:
                 print("Failed to download image.")
             image_index += 1
         return image_count
-
-    def check_for_updates(self):
-        for channel in self.yt_channels:
-            ct = CommunityTab(channel)
-            ct.load_posts(expire_after=EXPIRATION_TIME)
-            post = ct.posts[0] # Loads most recent post
-
-            # If recent post isn't saved as recent post, post and save it
-            if post.post_id != self.yt_channels[channel]:
-                self.post_to_discord(post, channel)
-                self.set_recent_post(channel, post.post_id)
-
-        pass # TODO: Iterate through saved YT channels to check for new community posts. Post if new

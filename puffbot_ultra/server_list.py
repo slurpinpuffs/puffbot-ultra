@@ -43,7 +43,3 @@ class ServerList:
     def save(self):
         with open(SAVE_PATH, "w") as file:
             json.dump([server.__dict__ for server in self.servers], file)
-
-    def check_all_updates(self):
-        for server in self.servers:
-            server.check_for_updates()
