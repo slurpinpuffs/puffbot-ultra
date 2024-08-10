@@ -22,7 +22,7 @@ intents.members = True
 intents.message_content = True
 intents.guilds = True
 
-bot = commands.Bot(command_prefix="p!", description=description, intents=intents)
+bot = commands.Bot(command_prefix="pu!", description=description, intents=intents)
 
 servers = ServerList()
 
