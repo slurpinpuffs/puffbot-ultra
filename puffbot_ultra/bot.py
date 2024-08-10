@@ -1,10 +1,7 @@
-from server import Server
 from server_list import ServerList
-from youtube_community_tab import Post
 from youtube_community_tab import CommunityTab
 
-import requests
-import os
+import asyncio
 
 import json
 
@@ -34,6 +31,10 @@ servers = ServerList()
 async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
     print('------')
+
+    while True:
+        await check_all_for_updates()
+        await asyncio.sleep(60)
 
 
 @bot.event
@@ -88,6 +89,12 @@ async def update(ctx):
     await check_for_updates(ctx.message.guild.id)
 
 
+async def check_all_for_updates():
+    print("Checking for updates in all servers...")
+    for server in servers.servers:
+        await check_for_updates(server.server_id)
+
+
 async def check_for_updates(server_id):
     server = servers.get_server_by_id(server_id)
     for channel in server.yt_channels:
@@ -103,8 +110,7 @@ async def check_for_updates(server_id):
 async def post_update(server_id, community_post, yt_channel):
     server = servers.get_server_by_id(server_id)
 
-    # TODO: Post to selected Discord channel in server, save as recent post in dict
-    post_thumbnails = community_post.get_thumbnails()  # TODO: Check if there are thumbnails (in json).
+    post_thumbnails = community_post.get_thumbnails()
     # If there are, post with thumbnails
     post_text = community_post.get_text()
     server.set_recent_post(yt_channel, community_post.post_id)
