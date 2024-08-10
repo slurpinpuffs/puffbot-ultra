@@ -66,6 +66,27 @@ async def addytchannel(ctx, channel_name: str):
         await ctx.send("Failed! Please make sure a valid YouTube channel name was entered.")
 
 
+@bot.command(description="Remove a YouTube channel to track posts on.")
+async def removeytchannel(ctx, channel_name: str):
+    try:
+        # Gets server id of where command was called
+        server_id = ctx.message.guild.id
+        server = servers.get_server_by_id(server_id)
+
+        if server == -1:
+            raise Exception
+        else:
+            if channel_name in server.yt_channels:
+
+                server.remove_yt_channel(channel_name)
+                servers.save()
+                await ctx.send(f'Successfully added {channel_name} to YT channel list.')
+            else:
+                await ctx.send(f'Failed! {channel_name} is not currently being tracked on this server.')
+    except Exception:
+        await ctx.send("Failed! Please make sure a valid YouTube channel name was entered.")
+
+
 @bot.command(description="Set channel in server to post updates in. Use channel ID, NOT name.")
 async def setupdatechannel(ctx, channel_id: int):
     try:
