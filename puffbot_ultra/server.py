@@ -1,6 +1,3 @@
-EXPIRATION_TIME = 1 * 60 * 60
-
-
 class Server:
     def __init__(self, server_id, yt_channels=None, update_channel_id=None):
         self.server_id = server_id
