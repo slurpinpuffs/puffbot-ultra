@@ -16,6 +16,7 @@ EXPIRATION_TIME = 1 * 60 * 60
 f = open("./config.json")
 config = f.read()
 token = json.loads(config)["token"]
+prefix = json.loads(config)["prefix"]
 
 description = "A bot that gets YouTube community post updates."
 
@@ -26,7 +27,7 @@ intents.members = True
 intents.message_content = True
 intents.guilds = True
 
-bot = commands.Bot(command_prefix="pu!", description=description, intents=intents, activity=activity)
+bot = commands.Bot(command_prefix=prefix, description=description, intents=intents, activity=activity)
 
 servers = ServerList()
 
