@@ -29,26 +29,3 @@ class Server:
     def set_recent_post(self, channel_name, recent_post_id):
         # Saves new recent post to dict
         self.yt_channels[channel_name] = recent_post_id
-
-    def download_thumbnails(self, thumbnails, yt_channel):
-        # Downloads images in channel-specific directory, returns number of images
-        channel_dir = "channels/" + yt_channel
-
-        if not os.path.exists(channel_dir):
-            os.mkdir(channel_dir)
-
-        image_index = 0
-        image_count = 0
-        for image_set in thumbnails:
-            try:
-                url = image_set[-1]["url"]
-
-                data = requests.get(url).content
-                f = open(f"{channel_dir}/img{image_index}.jpg", "wb")
-                f.write(data)
-                f.close()
-                image_count += 1
-            except Exception:
-                print("Failed to download image.")
-            image_index += 1
-        return image_count

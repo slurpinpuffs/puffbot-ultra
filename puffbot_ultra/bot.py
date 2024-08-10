@@ -4,6 +4,8 @@ from youtube_community_tab import CommunityTab
 import asyncio
 
 import json
+import os
+import requests
 
 import discord
 from discord.ext import commands
@@ -126,7 +128,7 @@ async def post_update(server_id, community_post, yt_channel):
             print(f"\n[Post {community_post.post_id}]")
             print(f"\t{post_text}")
         else:  # If post has thumbnails, download and post thumbnails
-            image_count = server.download_thumbnails(post_thumbnails, yt_channel)
+            image_count = download_thumbnails(post_thumbnails, yt_channel)
             file_list = []
             filename_template = f'channels/{yt_channel}/img'
             for x in range(image_count):
@@ -136,6 +138,30 @@ async def post_update(server_id, community_post, yt_channel):
             print(f"\t{community_post.get_text()}")
     else:
         pass
+
+
+def download_thumbnails(self, thumbnails, yt_channel):
+    # Downloads images in channel-specific directory, returns number of images
+    channel_dir = "channels/" + yt_channel
+
+    if not os.path.exists(channel_dir):
+        os.mkdir(channel_dir)
+
+    image_index = 0
+    image_count = 0
+    for image_set in thumbnails:
+        try:
+            url = image_set[-1]["url"]
+
+            data = requests.get(url).content
+            f = open(f"{channel_dir}/img{image_index}.jpg", "wb")
+            f.write(data)
+            f.close()
+            image_count += 1
+        except Exception:
+            print("Failed to download image.")
+        image_index += 1
+    return image_count
 
 
 bot.run(token)
