@@ -125,7 +125,6 @@ async def post_update(server_id, community_post, yt_channel):
             print(f"\t{post_text}")
         else:  # If post has thumbnails, download and post thumbnails
             image_count = server.download_thumbnails(post_thumbnails, yt_channel)
-            # TODO: Reduce redundant code when making post to Discord WITH images
             file_list = []
             filename_template = f'channels/{yt_channel}/img'
             for x in range(image_count):
