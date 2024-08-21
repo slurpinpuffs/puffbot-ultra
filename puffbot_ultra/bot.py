@@ -33,6 +33,7 @@ servers = ServerList()
 
 @bot.event
 async def on_ready():
+    """Confirm bot login to Discord API and continually check for updates."""
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
     print('------')
 
@@ -43,6 +44,7 @@ async def on_ready():
 
 @bot.event
 async def on_guild_join(guild):
+    """When joining Discord server, add server to server list."""
     servers.add_server(guild.id)
     print(f'Successfully added {guild.name} to server list.')
     servers.save()
@@ -115,12 +117,14 @@ async def update(ctx):
 
 
 async def check_all_for_updates():
+    """Check all servers in server list for new posts."""
     print("Checking for updates in all servers...")
     for server in servers.servers:
         await check_for_updates(server.server_id)
 
 
 async def check_for_updates(server_id):
+    """Check a server for new YouTube channel posts. If new post found, post_update() is called."""
     server = servers.get_server_by_id(server_id)
     for channel in server.yt_channels:
         ct = CommunityTab(channel)
@@ -133,6 +137,7 @@ async def check_for_updates(server_id):
 
 
 async def post_update(server_id, community_post, yt_channel):
+    """Push a YouTube community post to a Discord server."""
     server = servers.get_server_by_id(server_id)
 
     post_thumbnails = community_post.get_thumbnails()
@@ -162,7 +167,7 @@ async def post_update(server_id, community_post, yt_channel):
 
 
 def download_thumbnails(thumbnails, yt_channel):
-    # Downloads images in channel-specific directory, returns number of images
+    """Download images in channel-specific directory, return number of images."""
     channel_dir = "channels/" + yt_channel
 
     if not os.path.exists(channel_dir):
@@ -185,4 +190,5 @@ def download_thumbnails(thumbnails, yt_channel):
     return image_count
 
 
+# Runs the bot with Discord API token from config.json.
 bot.run(token)
