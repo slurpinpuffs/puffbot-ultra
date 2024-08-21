@@ -1,7 +1,11 @@
 # Puffbot ULTRA
 Discord bot that pulls YouTube community posts from given YouTube channels and posts them to a Discord channel. Works across multiple Discord servers.
 
-If you'd like to run your own instance of this bot, set your Discord Bot API token in config.json and run bot.py. You can also set a custom command prefix in the config (defauly is "pu!").
+If you'd like to run your own instance of this bot:
+- Set your Discord Bot API token in config.json.
+- Install requirements from requirements.txt.
+- Run bot.py.
+- You can also set a custom command prefix in the config (default is "pu!").
 
 To get the bot running on your server:
 - Invite it to your server while the script is running.
