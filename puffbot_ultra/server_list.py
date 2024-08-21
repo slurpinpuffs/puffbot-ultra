@@ -1,4 +1,4 @@
-from puffbot_ultra.server import Server
+from server import Server
 import json
 
 SAVE_PATH = "./servers_save.json"
