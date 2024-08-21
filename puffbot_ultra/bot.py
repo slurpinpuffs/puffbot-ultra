@@ -12,7 +12,10 @@ from discord.ext import commands
 
 EXPIRATION_TIME = 1 * 60 * 60
 
-f = open("./config.json")
+CURRENT_DIRECTORY = os.path.dirname(__file__)
+CONFIG_PATH = os.path.join(CURRENT_DIRECTORY, "config.json")
+
+f = open(CONFIG_PATH)
 config = f.read()
 token = json.loads(config)["token"]
 prefix = json.loads(config)["prefix"]

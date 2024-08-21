@@ -1,7 +1,9 @@
 from server import Server
 import json
+import os
 
-SAVE_PATH = "./servers_save.json"
+CURRENT_DIRECTORY = os.path.dirname(__file__)
+SAVE_PATH = os.path.join(CURRENT_DIRECTORY, "servers_save.json")
 
 
 class ServerList:
